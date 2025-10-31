@@ -1,0 +1,336 @@
+<!-- Gold IRA Calculator - Embeddable Version -->
+<!-- Copy everything below and paste into a Custom HTML block -->
+
+<style>
+    .gold-ira-calculator * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .gold-ira-calculator {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 30px;
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    }
+    
+    .gold-ira-calculator .calc-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .gold-ira-calculator .calc-header h2 {
+        color: #78350f;
+        font-size: 28px;
+        margin-bottom: 8px;
+    }
+    
+    .gold-ira-calculator .calc-header p {
+        color: #92400e;
+        font-size: 14px;
+    }
+    
+    .gold-ira-calculator .input-section {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    
+    .gold-ira-calculator .input-label {
+        font-weight: 600;
+        color: #78350f;
+        font-size: 16px;
+        margin-bottom: 15px;
+        display: block;
+    }
+    
+    .gold-ira-calculator .slider-container {
+        margin: 20px 0;
+    }
+    
+    .gold-ira-calculator input[type="range"] {
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        background: #fde68a;
+        outline: none;
+        -webkit-appearance: none;
+    }
+    
+    .gold-ira-calculator input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #d97706;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .gold-ira-calculator input[type="range"]::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #d97706;
+        cursor: pointer;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .gold-ira-calculator .amount-display {
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+        color: #d97706;
+        margin: 15px 0;
+    }
+    
+    .gold-ira-calculator .range-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #92400e;
+        margin-top: 8px;
+    }
+    
+    .gold-ira-calculator .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .gold-ira-calculator .result-card {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border-left: 4px solid #d97706;
+    }
+    
+    .gold-ira-calculator .result-label {
+        font-size: 13px;
+        color: #92400e;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    
+    .gold-ira-calculator .result-value {
+        font-size: 32px;
+        font-weight: bold;
+        color: #78350f;
+    }
+    
+    .gold-ira-calculator .result-subtitle {
+        font-size: 11px;
+        color: #92400e;
+        margin-top: 4px;
+    }
+    
+    .gold-ira-calculator .fee-breakdown {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    }
+    
+    .gold-ira-calculator .fee-breakdown h3 {
+        color: #78350f;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .gold-ira-calculator .fee-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px;
+        margin-bottom: 10px;
+        background: #fef3c7;
+        border-radius: 8px;
+    }
+    
+    .gold-ira-calculator .fee-name {
+        font-weight: 600;
+        color: #78350f;
+        font-size: 14px;
+    }
+    
+    .gold-ira-calculator .fee-amount {
+        font-weight: bold;
+        color: #d97706;
+        font-size: 16px;
+    }
+    
+    .gold-ira-calculator .disclaimer {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 12px;
+        color: #78350f;
+        line-height: 1.6;
+    }
+    
+    .gold-ira-calculator .disclaimer strong {
+        color: #92400e;
+    }
+    
+    @media (max-width: 640px) {
+        .gold-ira-calculator {
+            padding: 20px;
+        }
+        
+        .gold-ira-calculator .calc-header h2 {
+            font-size: 22px;
+        }
+        
+        .gold-ira-calculator .amount-display {
+            font-size: 28px;
+        }
+        
+        .gold-ira-calculator .results-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="gold-ira-calculator">
+    <div class="calc-header">
+        <h2>Gold IRA Cost Calculator</h2>
+        <p>Calculate your annual fees based on investment amount</p>
+    </div>
+    
+    <div class="input-section">
+        <label class="input-label">Your Investment Amount:</label>
+        <div class="amount-display" id="giraAmountDisplay">$25,000</div>
+        <div class="slider-container">
+            <input 
+                type="range" 
+                id="giraInvestmentSlider" 
+                min="5000" 
+                max="100000" 
+                step="5000" 
+                value="25000"
+            >
+            <div class="range-labels">
+                <span>$5,000</span>
+                <span>$100,000</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="results-grid">
+        <div class="result-card">
+            <div class="result-label">First Year Total</div>
+            <div class="result-value" id="giraFirstYear">$530</div>
+            <div class="result-subtitle">Includes setup</div>
+        </div>
+        
+        <div class="result-card">
+            <div class="result-label">Annual Ongoing</div>
+            <div class="result-value" id="giraAnnualCost">$400</div>
+            <div class="result-subtitle">Years 2+</div>
+        </div>
+        
+        <div class="result-card">
+            <div class="result-label">10-Year Total</div>
+            <div class="result-value" id="giraTenYear">$4,130</div>
+            <div class="result-subtitle">Projection</div>
+        </div>
+        
+        <div class="result-card">
+            <div class="result-label">Cost % of Investment</div>
+            <div class="result-value" id="giraPercentage">1.6%</div>
+            <div class="result-subtitle">Annual percentage</div>
+        </div>
+    </div>
+    
+    <div class="fee-breakdown">
+        <h3>Annual Fee Breakdown</h3>
+        <div class="fee-item">
+            <span class="fee-name">Setup Fee (One-time)</span>
+            <span class="fee-amount">$100</span>
+        </div>
+        <div class="fee-item">
+            <span class="fee-name">Custodian Fee (Annual)</span>
+            <span class="fee-amount">$200</span>
+        </div>
+        <div class="fee-item">
+            <span class="fee-name">Storage Fee (Annual)</span>
+            <span class="fee-amount">$150</span>
+        </div>
+        <div class="fee-item">
+            <span class="fee-name">Transaction Fees (Buy)</span>
+            <span class="fee-amount">$80</span>
+        </div>
+        <div class="fee-item">
+            <span class="fee-name">Transaction Fees (Sell, estimated)</span>
+            <span class="fee-amount">$50</span>
+        </div>
+    </div>
+    
+    <div class="disclaimer">
+        <strong>Note:</strong> Fees vary by custodian and can be negotiated for larger accounts. Some custodians offer flat fees regardless of account size. Storage fees may increase for segregated storage. Always get fee disclosures in writing before opening an account. Gold IRAs are most cost-effective for investments over $25,000.
+    </div>
+</div>
+
+<script>
+(function() {
+    const slider = document.getElementById('giraInvestmentSlider');
+    const amountDisplay = document.getElementById('giraAmountDisplay');
+    const firstYearDisplay = document.getElementById('giraFirstYear');
+    const annualCostDisplay = document.getElementById('giraAnnualCost');
+    const tenYearDisplay = document.getElementById('giraTenYear');
+    const percentageDisplay = document.getElementById('giraPercentage');
+    
+    const fees = {
+        setup: 100,
+        custodian: 200,
+        storage: 150,
+        buyTransaction: 80,
+        sellTransaction: 50
+    };
+    
+    function formatCurrency(amount) {
+        return '$' + amount.toLocaleString('en-US');
+    }
+    
+    function calculateFees(investment) {
+        const firstYear = fees.setup + fees.custodian + fees.storage + fees.buyTransaction;
+        const annualOngoing = fees.custodian + fees.storage + fees.sellTransaction;
+        const tenYear = firstYear + (annualOngoing * 9);
+        const percentage = ((annualOngoing / investment) * 100).toFixed(2);
+        
+        return {
+            firstYear,
+            annualOngoing,
+            tenYear,
+            percentage
+        };
+    }
+    
+    function updateCalculator() {
+        const investment = parseInt(slider.value);
+        const results = calculateFees(investment);
+        
+        amountDisplay.textContent = formatCurrency(investment);
+        firstYearDisplay.textContent = formatCurrency(results.firstYear);
+        annualCostDisplay.textContent = formatCurrency(results.annualOngoing);
+        tenYearDisplay.textContent = formatCurrency(results.tenYear);
+        percentageDisplay.textContent = results.percentage + '%';
+    }
+    
+    slider.addEventListener('input', updateCalculator);
+    updateCalculator();
+})();
+</script>
